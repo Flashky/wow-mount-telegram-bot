@@ -1,3 +1,24 @@
 bot:
   token: ${TELEGRAM_BOT_TOKEN}
   username: ${TELEGRAM_BOT_USERNAME}
+
+# OpenID Configuration endpoints: https://develop.battle.net/documentation/guides/using-oauth/oidc-endpoints
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration: 
+          blizzard:
+            client-id: ${BLIZZARD_CLIENT_ID}
+            client-secret: ${BLIZZARD_CLIENT_SECRET}            
+            client-authentication-method: post
+            authorization-grant-type: client_credentials
+            #redirect-uri: http://localhost:8080/login/oauth2/code/ # Si usamos formlogin: /oauth2/code/twitch | Si usamos oauth2login: /oauth2/code/ 
+            #scope:
+            #- chat:read
+        provider:
+          blizzard:
+            #authorization-uri: https://eu.battle.net/oauth/authorize
+            token-uri: https://eu.battle.net/oauth/token
+            #user-info-uri: https://eu.battle.net/oauth/userinfo       
