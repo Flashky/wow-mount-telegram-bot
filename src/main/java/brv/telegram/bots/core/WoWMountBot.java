@@ -5,13 +5,18 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
-import brv.telegram.bots.config.BotConfig;
+import brv.telegram.bots.configurations.properties.BotProperties;
 
 @Component
 public class WoWMountBot extends TelegramLongPollingBot {
-    
-	@Autowired
-	private BotConfig config;
+	
+	private String botUsername;
+	private String botToken;
+	
+	public WoWMountBot(@Autowired BotProperties botProperties) {
+		this.botUsername = botProperties.getUsername();
+		this.botToken = botProperties.getToken();
+	}
 	
 	@Override
 	public void onUpdateReceived(Update update) {
@@ -21,12 +26,12 @@ public class WoWMountBot extends TelegramLongPollingBot {
 
 	@Override
 	public String getBotUsername() {
-		return config.getUsername();
+		return botUsername;
 	}
 
 	@Override
 	public String getBotToken() {
-		return config.getToken();
+		return botToken;
 	}
 
 }
